@@ -1,25 +1,59 @@
 const openDialogBtn = document.querySelector('.add-book');
-const addDialog = document.querySelector('.add-dialog');
+const dialog = document.querySelector('.dialog');
 
 openDialogBtn.addEventListener('click', showAddBook)
 
 function showAddBook(){
 
-    addDialog.showModal();
+    dialog.showModal();
 
 };
 
-const submitBookBtn = document.querySelector('submit-book');
+const closeDialogX = document.querySelector('.close-dialog');
 
-submitBookBtn.addEventListener('click', postBook);
+closeDialogX.addEventListener('click', closeDialog);
+
+function closeDialog(){
+
+    dialog.close();
+
+}
+
+const submitBookBtn = document.querySelector('.submit-book');
+
+submitBookBtn.addEventListener('click', getBook);
+
+function Book(title, author, pages, read){
+
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+
+}
+
+function getBook(){
+
+    if(book) book = {};
+
+    let titleInput = document.querySelector('.get-title');
+    let authorInput = document.querySelector('.get-author');
+    let pagesInput = document.querySelector('.get-pages')
+    let readBoolInput = document.querySelector('#get-read');
+
+    let title = titleInput.value;
+    let author = authorInput.value;
+    let pages = pagesInput.value;
+    let readBool = readBoolInput.checked;
+
+    let book = new Book(title, author, pages, readBool)
+    console.log(book)
+    return book;
+
+}
 
 function postBook(){
 
-    let bookTitle = document.querySelector('.get-title');
-    let author = document.querySelector('.get-author');
-    let pages = document.querySelector('.get-pages')
-    let readBool = document.querySelector('#get-read');
-
-    
+        
 
 }

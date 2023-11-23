@@ -70,6 +70,7 @@ button:hover {
 }
 
 .card {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -78,7 +79,7 @@ button:hover {
   border-radius: 1em;
 }
 
-.add-dialog {
+.dialog {
   position: absolute;
   margin: auto;
   border: none;
@@ -88,15 +89,23 @@ button:hover {
   color: #d4d4d4;
   padding: 20px;
 }
-.add-dialog h2 {
+.dialog img {
+  position: absolute;
+  right: 20px;
+}
+.dialog img:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+.dialog h2 {
   text-align: center;
 }
-.add-dialog form {
+.dialog form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.add-dialog form input {
+.dialog form input {
   background-color: #262626;
   color: #d4d4d4;
   border: none;
@@ -104,18 +113,18 @@ button:hover {
   padding: 15px;
   font-family: "Poppins", sans-serif;
 }
-.add-dialog form input[type=text]:focus {
+.dialog form input[type=text]:focus {
   outline: 2px solid #d4d4d4;
 }
-.add-dialog form .get-read-div {
+.dialog form .get-read-div {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
-.add-dialog form .get-read-div #get-read {
+.dialog form .get-read-div #get-read {
   width: 20px;
 }
-.add-dialog::backdrop {
+.dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.795);
 }
 

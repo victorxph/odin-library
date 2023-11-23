@@ -68,6 +68,7 @@ button{
 
 .card{
 
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -77,7 +78,7 @@ button{
 
 }
 
-.add-dialog{
+.dialog{
 
     position: absolute;
     margin: auto;
@@ -87,6 +88,20 @@ button{
     background-color: $bg-color;
     color: $main-color;
     padding: 20px;
+
+    img{
+
+        position: absolute;
+        right: 20px;
+        
+        &:hover{
+
+            cursor: pointer;
+            opacity: 80%;
+
+        }
+
+    }
 
     h2{
 
