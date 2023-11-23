@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <header>
+
+        <h1>Library</h1>
+
+    </header>
+
+    <main>
+
+        <button class="add-book">+ Add Book</button>
+
+        <div class="cards-div">
+
+            <div class="card">
+
+                <span class="title">"Ozob"</span>
+                <span class="author">Leonel Caldela</span>
+                <span class="total-pages">600</span>
+                <button class="read">Read</button>
+                <button class="rmv-btn">Remove</button>
+
+            </div>
+
+            <div class="card">
+
+                <span class="title">"Ghanor"</span>
+                <span class="author">Leonel Caldela</span>
+                <span class="total-pages">700</span>
+                <button class="not-read">Not read</button>
+                <button class="rmv-btn">Remove</button>
+
+            </div>
+
+        </div>
+        
+    </main>
+    
+    <dialog class="add-dialog">
+
+        <form action="/library-backend" class="modal-form" method="dialog">
+            <h2>Add new book</h2>
+            <input type="text" class="get-titile" placeholder="Title">
+            <input type="text" class="get-author" placeholder="Author">
+            <input type="number" class="get-pages" placeholder="Pages">
+            <div class="get-read-div">
+                <label for="get-read">Have you read it?</label>
+                <input type="checkbox" id="get-read">
+            </div>
+
+            <button class="submit-book" type="submit">Add book</button>
+        </form>
+
+    </dialog>
+    
+</body>
+
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,143 @@
+@import 'config';
+
+*{
+
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body {
+
+    background-color: $bg-color;
+    font-family: $main-font;
+    color: $main-color;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    gap: 20px;
+
+
+}
+
+header{
+
+    background-color: $header-color;
+    padding: 20px;
+    display: flex;
+
+    h1{
+
+        align-self: center;
+
+    }
+}
+
+main{
+
+    display: grid;
+    gap: 20px;
+
+}
+
+button{
+
+    @include init-btn($header-color);
+
+}
+
+.add-book{
+
+    @include init-btn($header-color);
+    width: fit-content;
+    align-self: center;
+    justify-self: center;
+
+}
+
+.cards-div{
+
+    justify-self: center;
+    width: 70vw;
+    display: grid;
+    grid-template-rows: auto-fit, 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+ 
+}
+
+.card{
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #0a0a0a;
+    padding: 20px;
+    border-radius: 1em;
+
+}
+
+.add-dialog{
+
+    position: absolute;
+    margin: auto;
+    border: none;
+    width: 400px;
+    border-radius: 1em;
+    background-color: $bg-color;
+    color: $main-color;
+    padding: 20px;
+
+    h2{
+
+        text-align: center;
+
+    }
+
+    form{
+        
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        input{
+
+            @include init-txt-input;
+
+            &[type="text"]:focus{
+
+                outline: 2px solid $main-color;
+
+            }
+        }
+
+        .get-read-div{
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            #get-read{
+
+                width: 20px;
+
+            }
+
+        }
+
+    }
+    
+    &::backdrop{
+
+        background-color: rgba(0, 0, 0, 0.795);
+
+    }
+    
+
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

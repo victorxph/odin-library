@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: #171717;
+  font-family: "Poppins", sans-serif;
+  color: #d4d4d4;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  gap: 20px;
+}
+
+header {
+  background-color: #262626;
+  padding: 20px;
+  display: flex;
+}
+header h1 {
+  align-self: center;
+}
+
+main {
+  display: grid;
+  gap: 20px;
+}
+
+button {
+  background-color: #262626;
+  color: #d4d4d4;
+  border: none;
+  padding: 15px;
+  border-radius: 0.5em;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #333333;
+}
+
+.add-book {
+  background-color: #262626;
+  color: #d4d4d4;
+  border: none;
+  padding: 15px;
+  border-radius: 0.5em;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-self: center;
+  justify-self: center;
+}
+.add-book:hover {
+  background-color: #333333;
+}
+
+.cards-div {
+  justify-self: center;
+  width: 70vw;
+  display: grid;
+  grid-template-rows: auto-fit, 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #0a0a0a;
+  padding: 20px;
+  border-radius: 1em;
+}
+
+.add-dialog {
+  position: absolute;
+  margin: auto;
+  border: none;
+  width: 400px;
+  border-radius: 1em;
+  background-color: #171717;
+  color: #d4d4d4;
+  padding: 20px;
+}
+.add-dialog h2 {
+  text-align: center;
+}
+.add-dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.add-dialog form input {
+  background-color: #262626;
+  color: #d4d4d4;
+  border: none;
+  border-radius: 0.5em;
+  padding: 15px;
+  font-family: "Poppins", sans-serif;
+}
+.add-dialog form input[type=text]:focus {
+  outline: 2px solid #d4d4d4;
+}
+.add-dialog form .get-read-div {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.add-dialog form .get-read-div #get-read {
+  width: 20px;
+}
+.add-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.795);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
