@@ -23,6 +23,8 @@ const submitBookBtn = document.querySelector('.submit-book');
 
 submitBookBtn.addEventListener('click', getBook);
 
+let addBookForm = document.querySelector('.modal-form');
+
 function Book(title, author, pages, read){
 
     this.title = title;
@@ -32,9 +34,17 @@ function Book(title, author, pages, read){
 
 }
 
+const myLibrary = [];
+
+function isBookUnique(title, author, pages){
+
+    return myLibrary.every((book) => book.title !== title || book.author !== author || book.pages !== pages);
+
+}
+
 function getBook(){
 
-    if(book) book = {};
+    // if(book == true){ book = {};}
 
     let titleInput = document.querySelector('.get-title');
     let authorInput = document.querySelector('.get-author');
@@ -47,13 +57,30 @@ function getBook(){
     let readBool = readBoolInput.checked;
 
     let book = new Book(title, author, pages, readBool)
-    console.log(book)
-    return book;
 
-}
-
-function postBook(){
-
+    if(isBookUnique(title, author, pages)){
         
+        myLibrary.unshift(book)
+
+        addBookForm.reset();
+        dialog.close();
+        readBoolInput.checked = false;
+
+        console.log(book)
+        console.log(myLibrary)
+        return book
+
+    } else {
+
+        alert('Book already exists!');
+        return null
+
+    };
 
 }
+
+// function postBook(){
+
+
+
+// }
