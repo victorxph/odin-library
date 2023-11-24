@@ -108,7 +108,8 @@ button:hover {
 }
 .dialog img {
   position: absolute;
-  right: 20px;
+  right: 16px;
+  top: 16px;
 }
 .dialog img:hover {
   cursor: pointer;

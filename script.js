@@ -21,7 +21,7 @@ function closeDialog(){
 
 const submitBookBtn = document.querySelector('.submit-book');
 
-submitBookBtn.addEventListener('click', postBook);
+submitBookBtn.addEventListener('click', addBook);
 
 let addBookForm = document.querySelector('.modal-form');
 
@@ -38,45 +38,51 @@ const myLibrary = [];
 
 const cardsDiv = document.querySelector('.cards-div');
 
-function postBook(){
+function checkRequired(){
+
+    if(!titleInput.value || !authorInput.value || !pagesInput){ 
+        alert("Title, author and total pages are required")
+        return false
+    };
+    return true
+}
+
+function addBook(){
     
+    if(!checkRequired()) return;
+    
+    console.log(myLibrary)
+
     let book = getBook();
-    let isBookRead = book.read === true ? "Read" : "Not read";
-    
+
     let card = document.createElement('div');
+    card.classList.add('card')
+    let isBookRead = book.read === true ? "Read" : "Not read";
+
+    if (isBookRead === "Read") {
+
+        card.innerHTML = `<span class="title"><strong>"${book.title}"</strong></span>
     
-    if(isBookRead === "Read"){
-        
-        card.innerHTML = `<div class="card">
-        
-        <span class="title"><strong>"${book.title}"</strong></span>
-        
         <span class="author">${book.author}</span>
-        
+    
         <span class="total-pages">${book.pages}</span>
-        
+    
         <button class="read-btn read">${isBookRead}</button>
-        
-        <button class="rmv-btn">Remove</button>
-        
-        </div>`
-        
+    
+        <button class="rmv-btn">Remove</button>`
+
     } else {
-        
-        card.innerHTML = `<div class="card">
-                    
-        <span class="title"><strong>"${book.title}"</strong></span>
-    
+
+        card.innerHTML = `<span class="title"><strong>"${book.title}"</strong></span>
+
         <span class="author">${book.author}</span>
-    
+
         <span class="total-pages">${book.pages}</span>
-    
+
         <button class="read-btn not-read">${isBookRead}</button>
-    
-        <button class="rmv-btn">Remove</button>
-    
-        </div>`
-        
+
+        <button class="rmv-btn">Remove</button>`
+
     }
 
     cardsDiv.appendChild(card);
@@ -85,14 +91,14 @@ function postBook(){
     readBtnsArray = Array.from(readBtns);
 
     readBtnsArray.forEach(btn => {
-    btn.addEventListener('click', setReadState)
+        btn.addEventListener('click', setReadState)
     });
-    
+
     removeBtns = document.querySelectorAll('.rmv-btn');
     removeBtnArray = Array.from(removeBtns);
-    
+
     removeBtnArray.forEach(btn => {
-    btn.addEventListener('click', removeCard)
+        btn.addEventListener('click', removeBook)
     })
 
 }
@@ -103,14 +109,12 @@ function isBookUnique(title, author, pages){
 
 }
 
+let titleInput = document.querySelector('.get-title');
+let authorInput = document.querySelector('.get-author');
+let pagesInput = document.querySelector('.get-pages')
+let readBoolInput = document.querySelector('#get-read');
+
 function getBook(){
-
-    // if(book == true){ book = {};}
-
-    let titleInput = document.querySelector('.get-title');
-    let authorInput = document.querySelector('.get-author');
-    let pagesInput = document.querySelector('.get-pages')
-    let readBoolInput = document.querySelector('#get-read');
 
     let title = titleInput.value;
     let author = authorInput.value;
@@ -139,14 +143,6 @@ function getBook(){
     };
 
 }
-//Rm
-let readBtns = document.querySelectorAll('.read-btn');
-let readBtnsArray = Array.from(readBtns);
-
-readBtnsArray.forEach(btn => {
-    btn.addEventListener('click', setReadState)}
-);
-//Rm
 
 function setReadState(e){
 
@@ -171,10 +167,13 @@ function setReadState(e){
 let removeBtns;
 let removeBtnArray;
 
-function removeCard(e){
+function removeBook(e){
 
-    let cardToRemove = e.target.parentNode
-    let grandParentNode = cardToRemove.parentNode;
-    grandParentNode.removeChild(cardToRemove);
+    let removeBtn = e.target.parentNode
+    // let parentCard = cardToRemove.parentNode;
+    let gDaddyCardDiv = removeBtn.closest('.card')
+    gDaddyCardDiv.remove()
+    // grandParentNode.removeChild(cardToRemove);
+    // console.log(grandParentNode.parentNode)
 
 }
