@@ -21,7 +21,7 @@ function closeDialog(){
 
 const submitBookBtn = document.querySelector('.submit-book');
 
-submitBookBtn.addEventListener('click', getBook);
+submitBookBtn.addEventListener('click', postBook);
 
 let addBookForm = document.querySelector('.modal-form');
 
@@ -35,6 +35,67 @@ function Book(title, author, pages, read){
 }
 
 const myLibrary = [];
+
+const cardsDiv = document.querySelector('.cards-div');
+
+function postBook(){
+    
+    let book = getBook();
+    let isBookRead = book.read === true ? "Read" : "Not read";
+    
+    let card = document.createElement('div');
+    
+    if(isBookRead === "Read"){
+        
+        card.innerHTML = `<div class="card">
+        
+        <span class="title"><strong>"${book.title}"</strong></span>
+        
+        <span class="author">${book.author}</span>
+        
+        <span class="total-pages">${book.pages}</span>
+        
+        <button class="read-btn read">${isBookRead}</button>
+        
+        <button class="rmv-btn">Remove</button>
+        
+        </div>`
+        
+    } else {
+        
+        card.innerHTML = `<div class="card">
+                    
+        <span class="title"><strong>"${book.title}"</strong></span>
+    
+        <span class="author">${book.author}</span>
+    
+        <span class="total-pages">${book.pages}</span>
+    
+        <button class="read-btn not-read">${isBookRead}</button>
+    
+        <button class="rmv-btn">Remove</button>
+    
+        </div>`
+        
+    }
+
+    cardsDiv.appendChild(card);
+
+    readBtns = document.querySelectorAll('.read-btn');
+    readBtnsArray = Array.from(readBtns);
+
+    readBtnsArray.forEach(btn => {
+    btn.addEventListener('click', setReadState)
+    });
+    
+    removeBtns = document.querySelectorAll('.rmv-btn');
+    removeBtnArray = Array.from(removeBtns);
+    
+    removeBtnArray.forEach(btn => {
+    btn.addEventListener('click', removeCard)
+    })
+
+}
 
 function isBookUnique(title, author, pages){
 
@@ -60,7 +121,7 @@ function getBook(){
 
     if(isBookUnique(title, author, pages)){
         
-        myLibrary.unshift(book)
+        myLibrary.push(book)
 
         addBookForm.reset();
         dialog.close();
@@ -78,9 +139,42 @@ function getBook(){
     };
 
 }
+//Rm
+let readBtns = document.querySelectorAll('.read-btn');
+let readBtnsArray = Array.from(readBtns);
 
-// function postBook(){
+readBtnsArray.forEach(btn => {
+    btn.addEventListener('click', setReadState)}
+);
+//Rm
 
+function setReadState(e){
 
+    if(e.target.classList.contains('read')){
 
-// }
+        e.target.classList.remove('read');
+        e.target.classList.add('not-read');
+        e.target.textContent = 'Not read'
+        
+        
+    } else if(e.target.classList.contains('not-read')){
+        
+        e.target.classList.remove('not-read');
+        e.target.classList.add('read');
+        e.target.textContent = 'Read'
+    }
+
+    console.log(e.target.classList)
+
+}
+
+let removeBtns;
+let removeBtnArray;
+
+function removeCard(e){
+
+    let cardToRemove = e.target.parentNode
+    let grandParentNode = cardToRemove.parentNode;
+    grandParentNode.removeChild(cardToRemove);
+
+}

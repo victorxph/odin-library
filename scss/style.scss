@@ -58,7 +58,7 @@ button{
 .cards-div{
 
     justify-self: center;
-    width: 70vw;
+    width: 60vw;
     display: grid;
     grid-template-rows: auto-fit, 1fr;
     grid-template-columns: repeat(3, 1fr);
@@ -69,12 +69,40 @@ button{
 .card{
 
     font-size: 20px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    width: 100%;
     gap: 15px;
     background-color: #0a0a0a;
     padding: 20px;
     border-radius: 1em;
+    // white-space: normal;
+    
+    span{
+    
+        height: fit-content;
+
+    }
+
+    button{
+
+        height: fit-content;
+        
+    }
+    
+    .read{
+
+        background-color: $read;
+        font-weight: 600;
+
+    }
+
+    .not-read{
+
+        background-color: $not-read;
+        font-weight: 600;
+
+    }
 
 }
 

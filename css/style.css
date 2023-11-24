@@ -62,7 +62,7 @@ button:hover {
 
 .cards-div {
   justify-self: center;
-  width: 70vw;
+  width: 60vw;
   display: grid;
   grid-template-rows: auto-fit, 1fr;
   grid-template-columns: repeat(3, 1fr);
@@ -71,12 +71,29 @@ button:hover {
 
 .card {
   font-size: 20px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  width: 100%;
   gap: 15px;
   background-color: #0a0a0a;
   padding: 20px;
   border-radius: 1em;
+}
+.card span {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.card button {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.card .read {
+  background-color: #298526;
+  font-weight: 600;
+}
+.card .not-read {
+  background-color: #a32828;
+  font-weight: 600;
 }
 
 .dialog {
