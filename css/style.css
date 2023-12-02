@@ -18,6 +18,7 @@ header {
   background-color: #262626;
   padding: 20px;
   display: flex;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 header h1 {
   align-self: center;
@@ -55,6 +56,7 @@ button:hover {
   width: fit-content;
   align-self: center;
   justify-self: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.9);
 }
 .add-book:hover {
   background-color: #333333;
@@ -78,6 +80,7 @@ button:hover {
   background-color: #0a0a0a;
   padding: 20px;
   border-radius: 1em;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
 }
 .card span {
   height: -moz-fit-content;
@@ -102,6 +105,7 @@ button:hover {
   border: none;
   width: 400px;
   border-radius: 1em;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   background-color: #171717;
   color: #d4d4d4;
   padding: 20px;
@@ -153,11 +157,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 10px;
   left: 50%;
   color: white;
   transform: translate(-50%);
+  z-index: 3;
 }
 
 a.gitHubLink, a.gitHubLink:visited {

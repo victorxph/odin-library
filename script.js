@@ -1,179 +1,163 @@
-const openDialogBtn = document.querySelector('.add-book');
-const dialog = document.querySelector('.dialog');
+class Card {
 
-openDialogBtn.addEventListener('click', showAddBook)
+    constructor(title, author, pages, read){
 
-function showAddBook(){
-
-    dialog.showModal();
-
-};
-
-const closeDialogX = document.querySelector('.close-dialog');
-
-closeDialogX.addEventListener('click', closeDialog);
-
-function closeDialog(){
-
-    dialog.close();
-
-}
-
-const submitBookBtn = document.querySelector('.submit-book');
-
-submitBookBtn.addEventListener('click', addBook);
-
-let addBookForm = document.querySelector('.modal-form');
-
-function Book(title, author, pages, read){
-
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-
-}
-
-const myLibrary = [];
-
-const cardsDiv = document.querySelector('.cards-div');
-
-function checkRequired(){
-
-    if(!titleInput.value || !authorInput.value || !pagesInput){ 
-        alert("Title, author and total pages are required")
-        return false
-    };
-    return true
-}
-
-function addBook(){
-    
-    if(!checkRequired()) return;
-    
-    console.log(myLibrary)
-
-    let book = getBook();
-
-    let card = document.createElement('div');
-    card.classList.add('card')
-    let isBookRead = book.read === true ? "Read" : "Not read";
-
-    if (isBookRead === "Read") {
-
-        card.innerHTML = `<span class="title"><strong>"${book.title}"</strong></span>
-    
-        <span class="author">${book.author}</span>
-    
-        <span class="total-pages">${book.pages}</span>
-    
-        <button class="read-btn read">${isBookRead}</button>
-    
-        <button class="rmv-btn">Remove</button>`
-
-    } else {
-
-        card.innerHTML = `<span class="title"><strong>"${book.title}"</strong></span>
-
-        <span class="author">${book.author}</span>
-
-        <span class="total-pages">${book.pages}</span>
-
-        <button class="read-btn not-read">${isBookRead}</button>
-
-        <button class="rmv-btn">Remove</button>`
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read === true ? true : false;
 
     }
 
-    cardsDiv.appendChild(card);
+    index;
+    htmlElement;
 
-    readBtns = document.querySelectorAll('.read-btn');
-    readBtnsArray = Array.from(readBtns);
-
-    readBtnsArray.forEach(btn => {
-        btn.addEventListener('click', setReadState)
-    });
-
-    removeBtns = document.querySelectorAll('.rmv-btn');
-    removeBtnArray = Array.from(removeBtns);
-
-    removeBtnArray.forEach(btn => {
-        btn.addEventListener('click', removeBook)
-    })
-
-}
-
-function isBookUnique(title, author, pages){
-
-    return myLibrary.every((book) => book.title !== title || book.author !== author || book.pages !== pages);
-
-}
-
-let titleInput = document.querySelector('.get-title');
-let authorInput = document.querySelector('.get-author');
-let pagesInput = document.querySelector('.get-pages')
-let readBoolInput = document.querySelector('#get-read');
-
-function getBook(){
-
-    let title = titleInput.value;
-    let author = authorInput.value;
-    let pages = pagesInput.value;
-    let readBool = readBoolInput.checked;
-
-    let book = new Book(title, author, pages, readBool)
-
-    if(isBookUnique(title, author, pages)){
+    readBtn = document.querySelector(`#index${this.index} .read-btn`);
+    removeBtn = document.querySelector(`#index${this.index} .rmv-btn`);
+    parentDiv = document.querySelector('.cards-div');
+    
+    addListners(){
         
-        myLibrary.push(book)
+        this.readBtn.addEventListener('click', this.setReadState.bind(this.htmlElement))
+        this.removeBtn.addEventListener('click', this.removeCard.bind(this.htmlElement))
 
-        addBookForm.reset();
-        dialog.close();
-        readBoolInput.checked = false;
+    }   
+    
+    setHTML() {
 
-        console.log(book)
-        console.log(myLibrary)
-        return book
+        let cardHTML;
 
-    } else {
+        if (this.read) {
 
-        alert('Book already exists!');
-        return null
-
-    };
-
-}
-
-function setReadState(e){
-
-    if(e.target.classList.contains('read')){
-
-        e.target.classList.remove('read');
-        e.target.classList.add('not-read');
-        e.target.textContent = 'Not read'
+            cardHTML = `<span class="title"><strong>"${this.title}"</strong></span>
+    
+            <span class="author">${this.author}</span>
         
+            <span class="total-pages">${this.pages}</span>
         
-    } else if(e.target.classList.contains('not-read')){
+            <button class="read-btn read">Read</button>
         
-        e.target.classList.remove('not-read');
-        e.target.classList.add('read');
-        e.target.textContent = 'Read'
+            <button class="rmv-btn">Remove</button>`;
+
+            return cardHTML
+
+        }
+
+        cardHTML = `<span class="title"><strong>"${this.title}"</strong></span>
+
+            <span class="author">${this.author}</span>
+
+            <span class="total-pages">${this.pages}</span>
+
+            <button class="read-btn not-read">Not read</button>
+
+            <button class="rmv-btn">Remove</button>`
+
+            return cardHTML
+
     }
 
-    console.log(e.target.classList)
+    appendCard(){
+        
+        let newCard = document.createElement('div');
+        newCard.classList.add('card');
+        newCard.id = `index${this.index}`;
+        newCard.innerHTML = this.setHTML();
+        this.htmlElement = newCard
+        this.parentDiv.appendChild(newCard);
+        this.addListners();
+
+    }
+
+    setReadState(){
+        
+        console.log('fds')
+        
+        if(this.readBtn.classList.contains('not-read')){
+            
+            this.readBtn.classList.add('read')
+            return
+        }
+        
+        this.readBtn.classList.add('not-read')
+        
+    }
+    
+    removeCard(){
+        
+        console.log('fds')
+        let card = this.removeBtn.closest('.card');
+        card.remove()
+
+    }
 
 }
 
-let removeBtns;
-let removeBtnArray;
+let libModule = (function(){
 
-function removeBook(e){
+    let addBookBtn = document.querySelector('.add-book');
+    addBookBtn.addEventListener('click', openDialog);
 
-    let removeBtn = e.target.parentNode
-    // let parentCard = cardToRemove.parentNode;
-    let gDaddyCardDiv = removeBtn.closest('.card')
-    gDaddyCardDiv.remove()
-    // grandParentNode.removeChild(cardToRemove);
-    // console.log(grandParentNode.parentNode)
+    let dialog = document.querySelector('.dialog')
 
-}
+    function openDialog(){
+
+        dialog.showModal()
+
+    }
+
+    let closeDialogBtn = document.querySelector('.close-dialog')
+    closeDialogBtn.addEventListener('click', closeDialog)
+    
+    function closeDialog(){
+
+        dialog.close()
+
+    }
+
+    let bookForm = document.querySelector('.modal-form')
+
+    let titleInput = document.querySelector('.get-title');
+    let authorInput = document.querySelector('.get-author');
+    let pagesInput = document.querySelector('.get-pages');
+    let readInput = document.querySelector('#get-read')
+
+    let submitBookBtn = document.querySelector('.submit-book')
+    submitBookBtn.addEventListener('click', submitBook)
+
+    let library = []; 
+
+    function isBookUnique(title, author, pages){
+
+        return library.every((book) => book.title !== title || book.author !== author || book.pages !== pages);
+    
+    }
+    
+    let index = 0;
+
+    function submitBook(){
+
+        let book = new Card(titleInput.value, authorInput.value, pagesInput.value, readInput.checked);
+        book.index = index;
+        console.log(library);
+        library.push(book);
+        bookForm.reset();
+        closeDialog();
+        render();
+
+    }
+    
+    function render(){
+
+        library[index].appendCard()
+        index++
+
+    }
+
+    return {
+
+        isBookUnique: isBookUnique
+
+    }
+
+})();
