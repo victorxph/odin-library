@@ -6,20 +6,21 @@ class Card {
         this.author = author;
         this.pages = pages;
         this.read = read === true ? true : false;
-
+        
     }
-
+    
     index;
     htmlElement;
-
-    readBtn = document.querySelector(`#index${this.index} .read-btn`);
-    removeBtn = document.querySelector(`#index${this.index} .rmv-btn`);
+    
+    readBtn;// = document.querySelector(`#index${this.index} .read-btn`);
+    removeBtn;// = document.querySelector(`#index${this.index} .rmv-btn`);
     parentDiv = document.querySelector('.cards-div');
     
+
     addListners(){
         
-        this.readBtn.addEventListener('click', this.setReadState.bind(this.htmlElement))
-        this.removeBtn.addEventListener('click', this.removeCard.bind(this.htmlElement))
+        this.readBtn.addEventListener('click', this.setReadState.bind(this))
+        this.removeBtn.addEventListener('click', this.removeCard.bind(this))
 
     }   
     
@@ -65,27 +66,37 @@ class Card {
         newCard.innerHTML = this.setHTML();
         this.htmlElement = newCard
         this.parentDiv.appendChild(newCard);
-        this.addListners();
-
+        this.removeBtn = this.htmlElement.querySelector('.rmv-btn');
+        this.readBtn = this.htmlElement.querySelector('.read-btn');
+        
+        // console.log(this.readBtn)
+        // console.log(this.removeBtn)
+        
+        this.addListners()
+        // debugger;
+        
     }
-
+    
     setReadState(){
         
-        console.log('fds')
+        console.log(this.readBtn)
         
         if(this.readBtn.classList.contains('not-read')){
             
+            this.readBtn.classList.remove('not-read')
             this.readBtn.classList.add('read')
+            this.readBtn.textContent = 'Read'
             return
         }
         
-        this.readBtn.classList.add('not-read')
+        this.readBtn.classList.remove('read');
+        this.readBtn.classList.add('not-read');
+        this.readBtn.textContent = 'Not read'
         
     }
     
     removeCard(){
         
-        console.log('fds')
         let card = this.removeBtn.closest('.card');
         card.remove()
 
