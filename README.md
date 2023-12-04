@@ -1,6 +1,6 @@
 <img align="right" alt="HTML" height="50" width="50" src="https://www.theodinproject.com/mstile-310x310.png">
 
-# [Odin Library](https://victorxph.github.io/odin-library/)
+# [Library](https://victorxph.github.io/odin-library/)
 
 Simple library project from [TOP](https://www.theodinproject.com/)
 
