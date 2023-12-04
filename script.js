@@ -99,6 +99,7 @@ class Card {
         
         let card = this.removeBtn.closest('.card');
         card.remove()
+        libModule.removeBook(this.index)
 
     }
 
@@ -135,27 +136,62 @@ let libModule = (function(){
 
     let submitBookBtn = document.querySelector('.submit-book')
     submitBookBtn.addEventListener('click', submitBook)
+    dialog.addEventListener('keydown', (e) => {
+        
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            submitBook();
+        }
+        
+    });
 
     let library = []; 
 
     function isBookUnique(title, author, pages){
 
-        return library.every((book) => book.title !== title || book.author !== author || book.pages !== pages);
+        if(!library.every((book) => book.title !== title || book.author !== author || book.pages !== pages)){
+
+            alert("Book already exists!")
+            return false;
+
+        };
     
+        return true
+
+    }
+
+    function checkRequired(){
+
+        if(!titleInput.value || !authorInput.value || !pagesInput){ 
+            alert("Title, author and total pages are required!")
+            return false
+        };
+        return true
     }
     
     let index = 0;
 
     function submitBook(){
 
+        if(!checkRequired()) return;
+
         let book = new Card(titleInput.value, authorInput.value, pagesInput.value, readInput.checked);
+        if(!isBookUnique(book.title, book.author, book.pages)) return;
         book.index = index;
-        console.log(library);
         library.push(book);
         bookForm.reset();
         closeDialog();
         render();
 
+    }
+
+    function removeBook(objIndex){
+
+        library.splice(objIndex, 1)
+        library.forEach((book, index) => {
+            book.index = index;
+        });
+        index--
     }
     
     function render(){
@@ -165,9 +201,17 @@ let libModule = (function(){
 
     }
 
+    function showLibrary(){
+
+        console.log(library)
+
+    }
+
     return {
 
-        isBookUnique: isBookUnique
+        isBookUnique: isBookUnique,
+        showLibrary: showLibrary,
+        removeBook: removeBook
 
     }
 
