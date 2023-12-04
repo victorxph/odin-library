@@ -10,4 +10,4 @@ Simple library project from [TOP](https://www.theodinproject.com/)
 
 ## 2.0.0
 
-- Refactor to class syntax, old code can be seen in spaghetti.js
+- Refactor to class syntax, old code can be seen in [spaghetti.js](https://github.com/victorxph/odin-library/blob/main/spaghetti.js)
