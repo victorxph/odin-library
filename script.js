@@ -69,29 +69,32 @@ class Card {
         this.removeBtn = this.htmlElement.querySelector('.rmv-btn');
         this.readBtn = this.htmlElement.querySelector('.read-btn');
         
-        // console.log(this.readBtn)
-        // console.log(this.removeBtn)
-        
         this.addListners()
-        // debugger;
         
     }
     
     setReadState(){
-        
-        console.log(this.readBtn)
+
         
         if(this.readBtn.classList.contains('not-read')){
             
-            this.readBtn.classList.remove('not-read')
-            this.readBtn.classList.add('read')
-            this.readBtn.textContent = 'Read'
+            this.read = true;
+            console.log(this)
+            this.readBtn.classList.remove('not-read');
+            this.readBtn.classList.add('read');
+            this.readBtn.textContent = 'Read';
+
             return
-        }
+
+        } else if(this.readBtn.classList.contains('read')){
         
+        this.read = false;
+        console.log(this)
         this.readBtn.classList.remove('read');
         this.readBtn.classList.add('not-read');
         this.readBtn.textContent = 'Not read'
+
+        }
         
     }
     
